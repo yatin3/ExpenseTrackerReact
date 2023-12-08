@@ -1,4 +1,5 @@
 import ExpenseItem from "./components/Expenses/ExpenseItem";
+import NewExpense from "./components/Expenses/NewExpense";
 
 const App = () => {
   const Expenses = [
@@ -37,7 +38,7 @@ const App = () => {
 
 return (
   <div>
-    <h2>Let's get started</h2>
+   <NewExpense></NewExpense>
     {Expenses.map((element) => (
       <ExpenseItem
         key={element.id}  // Don't forget to add a unique key prop when rendering a list of components
@@ -47,6 +48,7 @@ return (
         location={element.location}
       />
     ))}
+
   </div>
 );
 
