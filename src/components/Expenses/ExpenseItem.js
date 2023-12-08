@@ -15,12 +15,19 @@ const  ExpenseItem = (props) => {
     //      </div>
 
     //   </div>
-    // );
+    // );    
+
+    const deleteHandler = (event) => {
+      console.log(event)
+      console.log(event.target.parentNode.remove())
+      //document.removeElement(event.target)
+     }    
+
     return (
         <div className='expense-item'>
           <ExpenseDate date={props.date}/>
-          <ExpenseDetails amount={props.amount} title={props.title} location={props.location}/>
-  
+          <ExpenseDetails  amount={props.amount} title={props.title} location={props.location}/>
+          <button onClick={deleteHandler} id={props.id}>Delete Expense</button>
         </div>
       );
   
