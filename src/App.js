@@ -1,5 +1,7 @@
+import React,{useState} from "react";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import NewExpense from "./components/Expenses/NewExpense";
+
 
 const App = () => {
   const Expenses = [
@@ -35,11 +37,24 @@ const App = () => {
 //   );
 // }
 
+const [allExpenses,setAllExpenses] = useState(Expenses)
+
+const addExpenseHandler = expense =>{
+   console.log("in app.js");
+   console.log(expense);
+   console.log(allExpenses);
+   setAllExpenses((prevExpenses)=>{
+    return [
+      ...prevExpenses,
+      expense
+    ]
+   });
+};
 
 return (
   <div>
-   <NewExpense></NewExpense>
-    {Expenses.map((element) => (
+   <NewExpense onAddExpense={addExpenseHandler} />
+    {allExpenses.map((element) => (
       <ExpenseItem
         key={element.id}  // Don't forget to add a unique key prop when rendering a list of components
         title={element.title}
