@@ -1,14 +1,15 @@
 import React,{useState} from "react";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import NewExpense from "./components/Expenses/NewExpense";
+import ExpenseFilter from "./ExpenseFilter";
 
 
 const App = () => {
   const Expenses = [
-    { id: "e1", title: "furniture", amount: 20, date: new Date(2023, 3, 21),location:"delhi" },
-    { id: "e2", title: "accessory", amount: 30, date: new Date(2023, 3, 22), location:"mumbai" },
-    { id: "e3", title: "grocery", amount: 40, date: new Date(2023, 3, 23), location:"calcutta" },
-    { id: "e4", title: "chocolatey", amount: 60, date: new Date(2023, 3, 24), location:"punjab" },
+    { id: "e1", title: "furniture", amount: 20, date: new Date(2020, 3, 21),location:"delhi" },
+    { id: "e2", title: "accessory", amount: 30, date: new Date(2021, 3, 22), location:"mumbai" },
+    { id: "e3", title: "grocery", amount: 40, date: new Date(2019, 3, 23), location:"calcutta" },
+    { id: "e4", title: "chocolatey", amount: 60, date: new Date(2022, 3, 24), location:"punjab" },
   ];
 //   return (
 //     <div>
@@ -39,6 +40,16 @@ const App = () => {
 
 const [allExpenses,setAllExpenses] = useState(Expenses)
 
+const [filteredYear,setFilteredYear] = useState('2020')
+
+const filterChangeHandler = (selectedYear) => {
+  setFilteredYear(selectedYear);
+}
+
+const filteredExpenses = Expenses.filter(expense => {
+    return expense.date.getFullYear().toString() == filteredYear
+});
+
 const addExpenseHandler = expense =>{
    console.log("in app.js");
    console.log(expense);
@@ -54,7 +65,11 @@ const addExpenseHandler = expense =>{
 return (
   <div>
    <NewExpense onAddExpense={addExpenseHandler} />
-    {allExpenses.map((element) => (
+   <ExpenseFilter 
+     selected = {filteredYear}
+     onChangeFilter={filterChangeHandler}
+   />
+    {filteredExpenses.map((element) => (
       <ExpenseItem
         key={element.id}  // Don't forget to add a unique key prop when rendering a list of components
         title={element.title}
