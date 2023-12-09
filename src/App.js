@@ -62,6 +62,20 @@ const addExpenseHandler = expense =>{
    });
 };
 
+let expensesContent = <p>No Expenses found</p>
+
+if (filteredExpenses.length > 0){
+  expensesContent = filteredExpenses.map((element) => (
+    <ExpenseItem
+      key={element.id}  // Don't forget to add a unique key prop when rendering a list of components
+      title={element.title}
+      amount={element.amount}
+      date={element.date}
+      location={element.location}
+    />
+  ))}
+
+
 return (
   <div>
    <NewExpense onAddExpense={addExpenseHandler} />
@@ -69,7 +83,7 @@ return (
      selected = {filteredYear}
      onChangeFilter={filterChangeHandler}
    />
-    {filteredExpenses.map((element) => (
+   {/* {filteredExpenses.lenght == 0 ? <p>no expenses found</p> : filteredExpenses.map((element) => (
       <ExpenseItem
         key={element.id}  // Don't forget to add a unique key prop when rendering a list of components
         title={element.title}
@@ -77,11 +91,21 @@ return (
         date={element.date}
         location={element.location}
       />
-    ))}
+    ))} */}
 
+    {/* {filteredExpenses.length ==0 && <p>No Expense Found</p>}
+    {filteredExpenses.length > 0 && filteredExpenses.map((element) => (
+      <ExpenseItem
+        key={element.id}  // Don't forget to add a unique key prop when rendering a list of components
+        title={element.title}
+        amount={element.amount}
+        date={element.date}
+        location={element.location}
+      />
+    ))} */}
+    {expensesContent}
   </div>
 );
-
-}
+  }
 
 export default App;
