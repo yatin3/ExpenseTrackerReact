@@ -2,14 +2,15 @@ import React,{useState} from "react";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import NewExpense from "./components/Expenses/NewExpense";
 import ExpenseFilter from "./ExpenseFilter";
+import ExpensesChart from "./components/Expenses/ExpensesChart";
 
 
 const App = () => {
   const Expenses = [
-    { id: "e1", title: "furniture", amount: 20, date: new Date(2020, 3, 21),location:"delhi" },
-    { id: "e2", title: "accessory", amount: 30, date: new Date(2021, 3, 22), location:"mumbai" },
-    { id: "e3", title: "grocery", amount: 40, date: new Date(2019, 3, 23), location:"calcutta" },
-    { id: "e4", title: "chocolatey", amount: 60, date: new Date(2022, 3, 24), location:"punjab" },
+    { id: "e1", title: "furniture", amount: 2000, date: new Date(2020, 3, 21),location:"delhi" },
+    { id: "e2", title: "accessory", amount: 3000, date: new Date(2021, 3, 22), location:"mumbai" },
+    { id: "e3", title: "grocery", amount: 4000, date: new Date(2019, 3, 23), location:"calcutta" },
+    { id: "e4", title: "chocolatey", amount: 6000, date: new Date(2022, 3, 24), location:"punjab" },
   ];
 //   return (
 //     <div>
@@ -47,7 +48,7 @@ const filterChangeHandler = (selectedYear) => {
 }
 
 const filteredExpenses = Expenses.filter(expense => {
-    return expense.date.getFullYear().toString() == filteredYear
+    return expense.date.getFullYear().toString() === filteredYear
 });
 
 const addExpenseHandler = expense =>{
@@ -103,6 +104,7 @@ return (
         location={element.location}
       />
     ))} */}
+    <ExpensesChart expenses={filteredExpenses}/>
     {expensesContent}
   </div>
 );
